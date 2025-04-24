@@ -1,0 +1,132 @@
+/* body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1em;
+    padding: 0;
+}
+main {
+    width: 450px;
+    margin: 0 auto;
+    padding: 10em;
+    background: grey;
+    border: 8px solid blue;
+}
+h1 {
+    color: blue;
+}
+label {
+    width: 10em;
+    padding-right: 1em;
+    float: left;
+    color: blue;
+}
+#data input {
+    float: left;
+    width: 15em;
+    margin-bottom: .5em;
+}
+#data span {
+    padding-left: .25em;
+}
+br {
+    clear: left;
+}
+#buttons input, #buttons reset {
+    background-color: blue;
+}
+footer{
+    float: left;
+    font-size: 25px;
+}
+#backButton{
+    color: blue;
+    width: 80px;
+}
+#backButton:hover{
+    background-color: orange;
+} */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    width: 450px;
+    margin: 0 auto;
+    padding: 1em;
+    background: white;
+    border: 2px solid navy;
+}
+
+h1, h2 {
+    margin-top: auto 0;
+    color: navy;
+}
+
+label {
+    width: 10em;
+    float: left;
+    padding-right: 1em;
+    padding-bottom: .5em;
+}
+
+footer {
+    font-size: 0.5em;
+    margin-top: 2em;
+}
+
+br {
+    clear: left;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+#data input {
+    float: left;
+    width: 15em;
+    margin-bottom: .5em;
+}
+
+#data span {
+    padding-left: .25em;
+}
+
+#buttons input {
+    float: left;
+    margin-bottom: .5em;
+}
