@@ -40,8 +40,8 @@ $num_doctors = $pdo->query('SELECT COUNT(*) FROM doctors')->fetchColumn();
                 <td><?=$doctor['last_name']?></td>
                 <td><?=$doctor['specialty']?></td>
                 <td class="actions">
-                    <a href="doctors_update.php?id=<?=$doctor['doctor_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
-                    <a href="doctors_update.php?id=<?=$doctor['doctor_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    <a href="doctors_update.php?doctor_id=<?=$doctor['doctor_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                    <a href="doctors_delete.php?doctor_id=<?=$doctor['doctor_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
                 </td>
             </tr>
             <?php endforeach; ?>
