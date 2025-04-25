@@ -20,7 +20,7 @@ if (isset($_GET['prescription_id'])) {
     // Get the contact from the contacts table
     $stmt = $pdo->prepare('SELECT * FROM prescriptions WHERE prescription_id = ?');
     $stmt->execute([$_GET['prescription_id']]);
-    $contact = $stmt->fetch(PDO::FETCH_ASSOC);
+    $prescription = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$prescription) {
         exit('Prescription doesn\'t exist with that ID!');
     }
@@ -32,9 +32,9 @@ if (isset($_GET['prescription_id'])) {
 
 <div class="content update">
 	<h2>Update Prescription #<?=$prescription['prescription_id']?></h2>
-    <form action="prescriptions_update.php?id=<?=$prescription['prescription_id']?>" method="post">
+    <form action="prescriptions_update.php?prescription_id=<?=$prescription['prescription_id']?>" method="post">
         <label for="prescription_id">Prescription ID</label>
-        <input type="text" name="prescription_id" value="<?=$prescription['prescription_id']?>" placeholder="26" value="auto" id="prescription_id">
+        <input type="text" name="prescription_id" value="<?=$prescription['prescription_id']?>" placeholder="26" value="auto" id="prescription_id"><br>
         
         <?php
             $stmt = $pdo->query("SELECT patient_id, last_name FROM patients");
@@ -43,22 +43,21 @@ if (isset($_GET['prescription_id'])) {
             $medications = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <label for="patient_id">Patient ID</label>
-        <label for="medication_id">Medication ID</label>
         <select name="patient_id" id="patient_id">
             <?php foreach($patients as $patient) : ?>
-            <option value="<?php echo $patient['patient_id']; ?>"><?php echo $patient['patient_id'] . ' - ' . $patient['last_name']; ?></option>
-            <?php endforeach; ?>
-        </select>
+                <option value="<?php echo $patient['patient_id']; ?>"><?php echo $patient['patient_id'] . ' - ' . $patient['last_name']; ?></option>
+                <?php endforeach; ?>
+            </select><br>
+         <label for="medication_id">Medication ID</label>
         <select name="medication_id" id="medication_id">
             <?php foreach($medications as $medication) : ?>
             <option value="<?php echo $medication['medication_id']; ?>"><?php echo $medication['medication_id'] . ' - ' . $medication['name']; ?></option>
             <?php endforeach; ?>
-        </select>
-
+        </select><br>
         <label for="quantity">Quantity</label>
+        <input type="text" name="quantity" value="<?=$prescription['quantity']?>" id="quantity"><br>
         <label for="date_received">Date Received</label>
-        <input type="text" name="quantity" value="<?=$prescription['quantity']?>" id="quantity">
-        <input type="text" name="date_received" value="<?=$prescription['date_received']?>" id="date_received">
+        <input type="text" name="date_received" value="<?=$prescription['date_received']?>" id="date_received"><br>
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
