@@ -27,19 +27,19 @@ if (isset($_GET['doctor_id'])) {
     exit('No ID specified!');
 }
 ?>
-<?=template_header('Update')?>
+<?=template_header('Read')?>
 
 <div class="content update">
 	<h2>Update Doctor #<?=$doctor['doctor_id']?></h2>
-    <form action="doctors_update.php?id=<?=$doctor['doctor_id']?>" method="post">
+    <form action="doctors_update.php?doctor_id=<?=$doctor['doctor_id']?>" method="post">
         <label for="doctor_id">Doctor ID</label>
         <label for="first_name">First Name</label>
-        <input type="text" name="doctor_id" placeholder="26" value="auto" id="doctor_id">
-        <input type="text" name="first_name" placeholder="John" id="first_name">
+        <input type="text" name="doctor_id" placeholder="26" value="<?=$doctor['doctor_id']?>" id="doctor_id">
+        <input type="text" name="first_name" placeholder="John" value="<?=$doctor['first_name']?>" id="first_name">
         <label for="last_name">Last Name</label>
         <label for="specialty">Specialty</label>
-        <input type="text" name="last_name" placeholder="Doe" id="last_name">
-        <input type="text" name="specialty" placeholder="Family Care" id="specialty">
+        <input type="text" name="last_name" placeholder="Doe" value="<?=$doctor['last_name']?>" id="last_name">
+        <input type="text" name="specialty" placeholder="Family Care" value="<?=$doctor['specialty']?>" id="specialty">
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
