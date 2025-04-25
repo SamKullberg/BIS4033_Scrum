@@ -26,14 +26,28 @@ if (!empty($_POST)) {
 	<h2>Create Prescription</h2>
     <form action="prescriptions_create.php" method="post">
         <label for="prescription_id">Prescription ID</label>
-        <label for="patient_id">Patient ID</label>
         <input type="text" name="prescription_id" placeholder="26" value="auto" id="prescription_id">
-        <input type="text" name="patient_id" id="patient_id">
+        <?php
+            $stmt = $pdo->query("SELECT patient_id, last_name FROM patients");
+            $patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt2 = $pdo->query("SELECT medication_id, name FROM medications");
+            $medications = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <label for="patient_id">Patient ID</label>
         <label for="medication_id">Medication ID</label>
+         <select name="patient_id" id="patient_id">
+            <?php foreach($patients as $patient) : ?>
+            <option value="<?php echo $patient['patient_id']; ?>"><?php echo $patient['patient_id'] . ' - ' . $patient['last_name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <select name="medication_id" id="medication_id">
+            <?php foreach($medications as $medication) : ?>
+            <option value="<?php echo $medication['medication_id']; ?>"><?php echo $medication['medication_id'] . ' - ' . $medication['name']; ?></option>
+            <?php endforeach; ?>
+        </select>
         <label for="quantity">Quantity</label>
-        <input type="text" name="medication_id" id="medication_id">
-        <input type="text" name="quantity" id="quantity">
         <label for="date_received">Date Received</label>
+        <input type="text" name="quantity" id="quantity">
         <input type="text" name="date_received" id="date_received">
         <input type="submit" value="Create">
     </form>
