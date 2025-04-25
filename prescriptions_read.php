@@ -42,8 +42,8 @@ $num_prescriptions = $pdo->query('SELECT COUNT(*) FROM prescriptions')->fetchCol
                 <td><?=$prescription['quantity']?></td>
                 <td><?=$prescription['date_received']?></td>
                 <td class="actions">
-                    <a href="prescriptions_update.php?id=<?=$prescription['prescription_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
-                    <a href="prescriptions_update.php?id=<?=$prescription['prescription_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    <a href="prescriptions_update.php?prescription_id=<?=$prescription['prescription_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                    <a href="prescriptions_delete.php?prescription_id=<?=$prescription['prescription_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
                 </td>
             </tr>
             <?php endforeach; ?>
