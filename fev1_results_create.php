@@ -12,8 +12,8 @@ if (!empty($_POST)) {
     $fev1_value = isset($_POST['fev1_value']) ? $_POST['fev1_value'] : '';
     $visit_id = isset($_POST['visit_id']) ? $_POST['visit_id'] : '';
     // Insert new record into the fev1_results table
-    $stmt = $pdo->prepare('INSERT INTO fev1_results VALUES (?, ?, ? )');
-    $stmt->execute([$fev1_id, $fev1_value, $visit_id]);
+    $stmt = $pdo->prepare('INSERT INTO fev1_results(fev1_id, visit_id, fev1_value) VALUES (?, ?, ? )');
+    $stmt->execute([$fev1_id, $visit_id, $fev1_value]);
     // Output message
     $msg = 'Created Successfully!';
 }
@@ -24,23 +24,19 @@ if (!empty($_POST)) {
 	<h2>Create Results</h2>
     <form action="fev1_results_create.php" method="post">
         <label for="fev1_id">ID</label>
+        <input type="text" name="fev1_id" placeholder="26" value="auto" fev1_id="fev1_id"><br>
         <label for="fev1_value">Value</label>
-        <input type="text" name="fev1_id" placeholder="26" value="auto" fev1_id="fev1_id">
-        <input type="number" name="fev1_value" placeholder="9867356" fev1_id="fev1_value">
+        <input type="number" name="fev1_value" placeholder="9867356" fev1_id="fev1_value"><br>
         <?php
-        $stmt = $pdo->query("SELECT fev1_id, name FROM fev1_results");
-        $fev1_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      
+            $stmt = $pdo->query("SELECT visit_id, visit_date FROM visits");
+            $visits = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <label for="visit_id">Customer ID</label>
-        
-         <select name="visit_id" fev1_id="visit_id">
+        <label for="visit_id">Visit ID</label>
+        <select name="visit_id" id="visit_id">
             <?php foreach($visits as $visit) : ?>
-            <option value="<?php echo $visit['visit_id']; ?>"><?php echo $visit['visit_id'] . ' - ' . $visit['name']; ?></option>
-            <?php endforeach; ?>
-        </select>
-        
-
+                <option value="<?php echo $visit['visit_id']; ?>"><?php echo $visit['visit_id'].' on '.$visit['visit_date'];?></option>
+                <?php endforeach; ?>
+            </select> <br>
         <input type="submit" value="Create">
     </form>
     <?php if ($msg): ?>
