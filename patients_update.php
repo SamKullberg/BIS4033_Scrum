@@ -58,12 +58,12 @@ if (isset($_GET['patient_id'])) {
             <input type="text" name="genetics" value="<?=$patient['genetics']?>" id="genetics"><br>
         
             <label for="diabetes">Diabetes</label>
-            <input type="text" name="other_conditions" value="<?=$patient['other_conditions']?>" id="other_conditions"><br>
-            <label for="other_conditions">Other Conditions</label>
             <select name="diabetes" value="<?=$patient['diabetes']?>" id="diabetes">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select><br>
+            <label for="other_conditions">Other Conditions</label>
+            <input type="text" name="other_conditions" value="<?=$patient['other_conditions']?>" id="other_conditions"><br>
             <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
