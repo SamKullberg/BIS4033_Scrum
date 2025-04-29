@@ -5,31 +5,31 @@ $pdo = pdo_connect_mysql();
 $msg = '';
 
 // Check if the patient ID is provided in the URL
-if (isset($_GET['id'])) {
+if (isset($_GET['patient_id'])) {
     if (!empty($_POST)) {
         // Get values from the form POST
-        $patientId = isset($_POST['patientId']) ? $_POST['patientId'] : NULL;
-        $patientFName = isset($_POST['patientFName']) ? $_POST['patientFName'] : '';
-        $patientLName = isset($_POST['patientLName']) ? $_POST['patientLName'] : '';
-        $patientGender = isset($_POST['patientGender']) ? $_POST['patientGender'] : '';
-        $patientBDay = isset($_POST['patientBDay']) ? $_POST['patientBDay'] : '';
-        $patientGenetic = isset($_POST['patientGenetic']) ? $_POST['patientGenetic'] : '';
-        $patientDiabetes = isset($_POST['patientDiabetes']) ? $_POST['patientDiabetes'] : '';
-        $patientCond = isset($_POST['patientCond']) ? $_POST['patientCond'] : '';
+        $patientId = isset($_POST['patient_id']) ? $_POST['patient_id'] : '';
+        $patientFName = isset($_POST['first_name']) ? $_POST['first_name'] : '';
+        $patientLName = isset($_POST['last_name']) ? $_POST['last_name'] : '';
+        $patientGender = isset($_POST['gender']) ? $_POST['gender'] : '';
+        $patientBDay = isset($_POST['birthdate']) ? $_POST['birthdate'] : '';
+        $patientGenetic = isset($_POST['genetics']) ? $_POST['genetics'] : '';
+        $patientDiabetes = isset($_POST['diabetes']) ? $_POST['diabetes'] : '';
+        $patientCond = isset($_POST['other_conditions']) ? $_POST['other_conditions'] : '';
 
         // Update the patient record
-        $stmt = $pdo->prepare('UPDATE patients SET patientId = ?, patientFName = ?, patientLName = ?, patientGender = ?, patientBDay = ?, patientGenetic = ?, patientDiabetes = ?, patientCond = ? WHERE patientId = ?');
-        $stmt->execute([$patientId, $patientFName, $patientLName, $patientGender, $patientBDay, $patientGenetic, $patientDiabetes, $patientCond, $_GET['id']]);
+        $stmt = $pdo->prepare('UPDATE patients SET patient_id = ?, first_name = ?, last_name = ?, gender = ?, birthdate = ?, genetics = ?, diabetes = ?, other_conditions = ? WHERE patient_id = ?');
+        $stmt->execute([$patientId, $patientFName, $patientLName, $patientGender, $patientBDay, $patientGenetic, $patientDiabetes, $patientCond, $_GET['patient_id']]);
         $msg = 'Updated Successfully!';
     }
 
     // Fetch the existing patient data
-    $stmt = $pdo->prepare('SELECT * FROM patients WHERE patientId = ?');
-    $stmt->execute([$_GET['id']]);
-    $contact = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare('SELECT * FROM patients WHERE patient_id = ?');
+    $stmt->execute([$_GET['patient_id']]);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$contact) {
-        exit('Contact doesn\'t exist with that ID!');
+    if (!$patient) {
+        exit('Patient doesn\'t exist with that ID!');
     }
 } else {
     exit('No ID specified!');
@@ -39,38 +39,32 @@ if (isset($_GET['id'])) {
 <?=template_header('Update')?>
 
 <div class="content update">
-    <h2>Update Patient #<?=$contact['patientId']?></h2>
-    <form action="patients_update.php?id=<?=$contact['patientId']?>" method="post">
-        <label for="patientId">Patient ID</label>
-        <input type="text" name="patientId" value="<?=$contact['patientId']?>" id="patientId">
+    <h2>Update Patient #<?=$patient['patient_id']?></h2>
+    <form action="patients_update.php?patient_id=<?=$patient['patient_id']?>" method="post">
+            <label for="patient_id">Patient ID</label>
+            <input type="text" name="patient_id" value="<?=$patient['patient_id']?>" id="patient_id"><br>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" value="<?=$patient['first_name']?>" id="first_name"><br>
 
-        <label for="patientFName">First Name</label>
-        <input type="text" name="patientFName" value="<?=$contact['patientFName']?>" id="patientFName">
 
-        <label for="patientLName">Last Name</label>
-        <input type="text" name="patientLName" value="<?=$contact['patientLName']?>" id="patientLName">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" value="<?=$patient['last_name']?>" id="last_name"><br>
+            <label for="gender">Gender</label>
+            <input type="text" name="gender" value="<?=$patient['gender']?>" id="gender"><br>
 
-        <label for="patientGender">Gender</label>
-        <input type="text" name="patientGender" value="<?=$contact['patientGender']?>" id="patientGender">
-
-        <label for="patientBDay">Birthdate</label>
-        <input type="text" name="patientBDay" value="<?=$contact['patientBDay']?>" id="patientBDay">
-
-        <label for="patientGenetic">Genetics</label>
-        <input type="text" name="patientGenetic" value="<?=$contact['patientGenetic']?>" id="patientGenetic">
-
-<div>
-        <label for="patientDiabetes">Diabetes</label>
-        <select name="patientDiabetes" id="patientDiabetes">
-            <option value="Yes" <?= $contact['patientDiabetes'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
-            <option value="No" <?= $contact['patientDiabetes'] == 'No' ? 'selected' : '' ?>>No</option>
-        </select>
-</div>
-<div>
-        <label for="patientCond">Other Conditions</label>
-        <input type="text" name="patientCond" value="<?=$contact['patientCond']?>" id="patientCond">
-</div>
-        <input type="submit" value="Update">
+            <label for="birthdate">Birthdate</label>
+            <input type="date" name="birthdate" value="<?=$patient['birthdate']?>" id="birthdate"><br>
+            <label for="genetics">Genetics</label>
+            <input type="text" name="genetics" value="<?=$patient['genetics']?>" id="genetics"><br>
+        
+            <label for="diabetes">Diabetes</label>
+            <input type="text" name="other_conditions" value="<?=$patient['other_conditions']?>" id="other_conditions"><br>
+            <label for="other_conditions">Other Conditions</label>
+            <select name="diabetes" value="<?=$patient['diabetes']?>" id="diabetes">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+            <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
     <p><?=$msg?></p>
@@ -78,4 +72,3 @@ if (isset($_GET['id'])) {
 </div>
 
 <?=template_footer()?>
-
