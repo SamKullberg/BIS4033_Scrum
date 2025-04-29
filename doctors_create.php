@@ -25,13 +25,13 @@ if (!empty($_POST)) {
 	<h2>Create Doctor</h2>
     <form action="doctors_create.php" method="post">
         <label for="doctor_id">Doctor ID</label>
+        <input type="text" name="doctor_id" placeholder="26" value="auto" id="doctor_id"><br>
         <label for="first_name">First Name</label>
-        <input type="text" name="doctor_id" placeholder="26" value="auto" id="doctor_id">
-        <input type="text" name="first_name" placeholder="John" id="first_name">
+        <input type="text" name="first_name" placeholder="John" id="first_name"><br>
         <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" placeholder="Doe" id="last_name"><br>
         <label for="specialty">Specialty</label>
-        <input type="text" name="last_name" placeholder="Doe" id="last_name">
-        <input type="text" name="specialty" placeholder="Family Care" id="specialty">
+        <input type="text" name="specialty" placeholder="Family Care" id="specialty"><br>
         <input type="submit" value="Create">
     </form>
     <?php if ($msg): ?>
