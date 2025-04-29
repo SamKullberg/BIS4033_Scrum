@@ -29,6 +29,7 @@ function template_header($title) {
                   <a href="' . WEB_ROOT . APP_FOLDER_NAME . '/scripts/doctors/doctors_read.php"><i class="fas fa-user-md"></i>Doctors</a>
                   <a href="' . WEB_ROOT . APP_FOLDER_NAME . '/scripts/patients/patients_read.php"><i class="fas fa-procedures"></i>Patients</a>
                   <a href="' . WEB_ROOT . APP_FOLDER_NAME . '/scripts/prescriptions/prescriptions_read.php"><i class="fas fa-prescription-bottle-alt"></i>Prescriptions</a>
+                  <a href="' . WEB_ROOT . APP_FOLDER_NAME . '/scripts/medications_read.php"><i class="fas fa-pills"></i>Medications</a>
                </div>
             </nav>
     ';
