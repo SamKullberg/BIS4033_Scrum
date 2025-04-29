@@ -21,7 +21,7 @@ if (isset($_GET['doctor_id'])) {
             $msg = 'You have deleted the doctor!';
         } else {
             // User clicked the "No" button, redirect them back to the read page
-            header('Location: read.php');
+            header('Location: doctors_read.php');
             exit;
         }
     }
