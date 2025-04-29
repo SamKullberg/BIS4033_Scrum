@@ -20,8 +20,8 @@ $num_fev1_results = $pdo->query('SELECT COUNT(*) FROM fev1_results')->fetchColum
 <?=template_header('Read')?>
 
 <div class="content read">
-	<h2>Read fev1_results</h2>
-	<a href="fev1_results_create.php" class="create-fev1_result">Create fev1_results</a>
+	<h2>Read FEV1 Results</h2>
+	<a href="fev1_results_create.php" class="create-fev1_result">Create FEV1 Results</a>
 	<table>
         <thead>
             <tr>
@@ -37,7 +37,6 @@ $num_fev1_results = $pdo->query('SELECT COUNT(*) FROM fev1_results')->fetchColum
                 <td><?=$fev1_result['fev1_id']?></td>
                 <td><?=$fev1_result['fev1_value']?></td>
                 <td><?=$fev1_result['visit_id']?></td>
-                <td><?=$fev1_result['created']?></td>
                 <td class="actions">
                     <a href="fev1_results_update.php?fev1_id=<?=$fev1_result['fev1_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
                     <a href="fev1_results_delete.php?fev1_id=<?=$fev1_result['fev1_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
