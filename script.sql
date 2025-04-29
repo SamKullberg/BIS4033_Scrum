@@ -57,12 +57,24 @@ FLUSH PRIVILEGES;
 
 CREATE TABLE IF NOT EXISTS `medications` (
     `medication_id` INT(11) NOT NULL AUTO_INCREMENT,
-  	`name` VARCHAR(255) NOT NULL,
-  	`requires_quantity` BOOLEAN NOT NULL,
-    `requires_date` BOOLEAN NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`medication_id`)
 )
 
+INSERT INTO `medications` (`name`)
+VALUES
+    ('Vest'),
+    ('Acapella'),
+    ('Plumozyme'),
+    ('Inhaled Tobi'),
+    ('Inhaled Colistin'),
+    ('Hypertonic Saline 3%'),
+    ('Hypertonic Saline 7%'),
+    ('Azithromycin'),
+    ('Clarithromycin'),
+    ('Inhaled Gentamicin'),
+    ('Enzymes');
+	
 USE BIS4033Scrum;
 GRANT SELECT, INSERT, UPDATE ON medications TO 'kermit'@'localhost';
 FLUSH PRIVILEGES;
