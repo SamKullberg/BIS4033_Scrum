@@ -9,10 +9,10 @@ if (isset($_GET['fev1_id'])) {
         // This part is similar to the create.php, //but instead we update a record and not //insert
         $fev1_id = isset($_POST['fev1_id']) ? $_POST['fev1_id'] : NULL;
         $fev1_value = isset($_POST['fev1_value']) ? $_POST['fev1_value'] : '';
-        $visits_id = isset($_POST['visits_id']) ? $_POST['visits_id'] : '';
+        $visit_id = isset($_POST['visit_id']) ? $_POST['visit_id'] : '';
         // Update the record
-        $stmt = $pdo->prepare('UPDATE fev1_results SET fev1_id = ?, fev1_value = ?, visits_id = ? WHERE fev1_id = ?');
-        $stmt->execute([$fev1_id, $fev1_value, $visits_id, $_GET['fev1_id']]);
+        $stmt = $pdo->prepare('UPDATE fev1_results SET fev1_id = ?, fev1_value = ?, visit_id = ? WHERE fev1_id = ?');
+        $stmt->execute([$fev1_id, $fev1_value, $visit_id, $_GET['fev1_id']]);
         $msg = 'Updated Successfully!';
     }
     // Get the visit from the visits table
@@ -32,25 +32,19 @@ if (isset($_GET['fev1_id'])) {
 	<h2>Update Results #<?=$fev1_results['fev1_id']?></h2>
     <form action="fev1_results_update.php?fev1_id=<?=$fev1_results['fev1_id']?>" method="post">
         <label for="fev1_id">ID</label>
+        <input type="text" name="fev1_value" placeholder="Summarize Results" value="<?=$fev1_results['fev1_value']?>" fev1_id="fev1_value"><br>
          <label for="fev1_value">Value</label>
-        <input type="text" name="fev1_id" placeholder="1" value="<?=$fev1_results['fev1_id']?>" fev1_id="fev1_id">
-        <input type="text" name="fev1_value" placeholder="Summarize Results" 
-               value="<?=$fev1_results['fev1_value']?>" fev1_id="fev1_value">
-       
+        <input type="text" name="fev1_id" placeholder="1" value="<?=$fev1_results['fev1_id']?>" fev1_id="fev1_id"><br>
          <?php
-        $stmt = $pdo->query("SELECT visits_id, name FROM visits");
+        $stmt = $pdo->query("SELECT visit_id, visit_date FROM visits");
         $visits = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        
-        <label for="visits_id">Contact</label>
-        <label for="created">Created</label>
-        <select name="visits_id" fev1_id="visits_id">
-            <option value="<?=$fev1_results['visits_id']?>" selected><?=$fev1_results['visits_id']?></option>
+        <label for="visit_id">Visit ID</label>
+        <select name="visit_id" value="<?=$fev1_results['visit_id']?>"id="visit_id">
             <?php foreach($visits as $visit) : ?>
-            <option value="<?php echo $visit['fev1_id']; ?>"><?php echo $visit['fev1_id'] . ' - ' . $visit['name']; ?></option>
-            <?php endforeach; ?>
-        </select>
-        
+            <option value="<?php echo $visit['visit_id']; ?>"><?php echo $visit['visit_id'].' on '.$visit['visit_date']; ?></option>
+            <?php endforeach; ?><br>
+        </select><br>
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
