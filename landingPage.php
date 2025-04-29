@@ -5,13 +5,13 @@
 // Your PHP code here.
 
 // Home Page template below.
-?>
+template_header('Home');
 
-<?=template_header('Home')?>
-
+echo '
 <div class="content">
 	<h2>Home</h2>
 	<p>Welcome to the ACME Medical records page! You can find your medical records here.</p>
-</div>
+</div>';
 
-<?=template_footer()?>
+template_footer()
+?>
