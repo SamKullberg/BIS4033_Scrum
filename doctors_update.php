@@ -33,13 +33,13 @@ if (isset($_GET['doctor_id'])) {
 	<h2>Update Doctor #<?=$doctor['doctor_id']?></h2>
     <form action="doctors_update.php?doctor_id=<?=$doctor['doctor_id']?>" method="post">
         <label for="doctor_id">Doctor ID</label>
+        <input type="text" name="doctor_id" placeholder="26" value="<?=$doctor['doctor_id']?>" id="doctor_id"><br>
         <label for="first_name">First Name</label>
-        <input type="text" name="doctor_id" placeholder="26" value="<?=$doctor['doctor_id']?>" id="doctor_id">
-        <input type="text" name="first_name" placeholder="John" value="<?=$doctor['first_name']?>" id="first_name">
+        <input type="text" name="first_name" placeholder="John" value="<?=$doctor['first_name']?>" id="first_name"><br>
         <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" placeholder="Doe" value="<?=$doctor['last_name']?>" id="last_name"><br>
         <label for="specialty">Specialty</label>
-        <input type="text" name="last_name" placeholder="Doe" value="<?=$doctor['last_name']?>" id="last_name">
-        <input type="text" name="specialty" placeholder="Family Care" value="<?=$doctor['specialty']?>" id="specialty">
+        <input type="text" name="specialty" placeholder="Family Care" value="<?=$doctor['specialty']?>" id="specialty"><br>
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
