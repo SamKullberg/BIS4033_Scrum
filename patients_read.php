@@ -8,19 +8,19 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] :
 // Number of records to show on each page
 $records_per_page = 5;
 // Prepare the SQL statement and get records from our contacts table, LIMIT will determine the page
-$stmt = $pdo->prepare('SELECT * FROM patients ORDER BY patientId LIMIT :current_page, :record_per_page');
+$stmt = $pdo->prepare('SELECT * FROM patients ORDER BY patient_id LIMIT :current_page, :record_per_page');
 $stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
 $stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 $stmt->execute();
 // Fetch the records so we can display them in our template.
-$contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$patients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Get the total number of contacts, this is so we can determine whether there should be a next and previous button
-$num_contacts = $pdo->query('SELECT COUNT(*) FROM patients')->fetchColumn();
+$num_patients = $pdo->query('SELECT COUNT(*) FROM patients')->fetchColumn();
 ?>
 <?=template_header('Read')?>
 
 <div class="patients_read">
-	<h2>Read Contacts</h2>
+	<h2>Read Patients</h2>
 	<a href="patients_create.php" class="create-patient">Create Patient</a>
 	<table>
         <thead>
@@ -37,19 +37,19 @@ $num_contacts = $pdo->query('SELECT COUNT(*) FROM patients')->fetchColumn();
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($contacts as $patient): ?>
+        <?php foreach ($patients as $patient): ?>
             <tr>
-                <td><?=$patient['patientId']?></td>
-                <td><?=$patient['patientFName']?></td>
-                <td><?=$patient['patientLName']?></td>
-                <td><?=$patient['patientGender']?></td>
-                <td><?=$patient['patientBDay']?></td>
-                <td><?=$patient['patientGenetic']?></td>
-                <td><?=$patient['patientDiabetes']?></td>
-                <td><?=$patient['patientCond']?></td>
+                <td><?=$patient['patient_id']?></td>
+                <td><?=$patient['first_name']?></td>
+                <td><?=$patient['last_name']?></td>
+                <td><?=$patient['gender']?></td>
+                <td><?=$patient['birthdate']?></td>
+                <td><?=$patient['genetics']?></td>
+                <td><?=$patient['diabetes']?></td>
+                <td><?=$patient['other_conditions']?></td>
                 <td class="actions">
-                    <a href="patients_update.php?id=<?=$patient['patientId']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
-                    <a href="patients_delete.php?id=<?=$patient['patientId']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                    <a href="patients_update.php?patient_id=<?=$patient['patient_id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                    <a href="patients_delete.php?patient_id=<?=$patient['patient_id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -59,7 +59,7 @@ $num_contacts = $pdo->query('SELECT COUNT(*) FROM patients')->fetchColumn();
 		<?php if ($page > 1): ?>
 		<a href="patients_read.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-sm"></i></a>
 		<?php endif; ?>
-		<?php if ($page*$records_per_page < $num_contacts): ?>
+		<?php if ($page*$records_per_page < $num_patients): ?>
 		<a href="patients_read.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-sm"></i></a>
 		<?php endif; ?>
 	</div>
