@@ -57,7 +57,7 @@ if (isset($_GET['prescription_id'])) {
         <label for="quantity">Quantity</label>
         <input type="text" name="quantity" value="<?=$prescription['quantity']?>" id="quantity"><br>
         <label for="date_received">Date Received</label>
-        <input type="text" name="date_received" value="<?=$prescription['date_received']?>" id="date_received"><br>
+        <input type="date" name="date_received" value="<?=$prescription['date_received']?>" id="date_received"><br>
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>
